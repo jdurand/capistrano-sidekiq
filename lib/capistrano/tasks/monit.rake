@@ -130,12 +130,7 @@ namespace :sidekiq do
     end
 
     def sudo_if_needed(command)
-      send(use_sudo? ? :sudo : :execute, command)
+      send(fetch(:sidekiq_monit_use_sudo) ? :sudo : :execute, command)
     end
-
-    def use_sudo?
-      fetch(:sidekiq_monit_use_sudo)
-    end
-
   end
 end
